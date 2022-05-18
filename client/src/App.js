@@ -7,7 +7,7 @@ import FoodG from "./components/FoodG/FoodG.jsx";
 function App() {
   return (
     <div className="App">
-      <Route path="/">
+      <Route path="/recipes">
         <FoodG />
       </Route>
     </div>
