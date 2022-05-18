@@ -1,9 +1,15 @@
-import './App.css';
+import React from "react";
+import { Route } from "react-router-dom";
+import "./App.css";
+import FoodG from "./components/FoodG/FoodG.jsx";
+// import { getAllRecipes } from "./redux/actions/index.js";
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Food</h1>
+      <Route path="/">
+        <FoodG />
+      </Route>
     </div>
   );
 }

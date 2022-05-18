@@ -166,7 +166,7 @@ router.get("/types", async function (req, res) {
 
 router.post("/recipe", async (req, res) => {
   try {
-    types();
+    await types();
     let { name, dish_summary, score, healthScore, steps, diets } = req.body;
     if (!name || !dish_summary)
       return res
