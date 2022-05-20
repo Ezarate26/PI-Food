@@ -1,8 +1,8 @@
 require("dotenv").config();
 const { Router } = require("express");
 const axios = require("axios").default;
-//const { API } = process.env;
-const API = "48f825ac985b4674927decbde47c5a2d";
+const { API } = process.env;
+//const API = "48f825ac985b4674927decbde47c5a2d";
 const { Recipe, Diet } = require("../db");
 const Sequelize = require("sequelize");
 
@@ -96,11 +96,11 @@ router.get("/recipes/:id", async function (req, res) {
       });
 
       return res.send(item);
-    } else {
-      item = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API}`
-      );
     }
+    item = await axios.get(
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API}`
+    );
+
     let data = item.data;
 
     const dietList = [...data.diets];
@@ -168,7 +168,16 @@ router.get("/types", async function (req, res) {
 router.post("/recipe", async (req, res) => {
   try {
     await types();
-    let { name, dish_summary, score, healthScore, steps, diets } = req.body;
+    let {
+      name,
+      dish_summary,
+      score,
+      healthScore,
+      steps,
+      diets,
+      image,
+      dishTypes,
+    } = req.body;
     if (!name || !dish_summary)
       return res
         .status(422)
@@ -188,6 +197,8 @@ router.post("/recipe", async (req, res) => {
       score: score,
       healthScore: healthScore,
       steps,
+      image,
+      dishTypes,
     });
 
     let formated = Array.isArray(diets) ? diets : [diets];

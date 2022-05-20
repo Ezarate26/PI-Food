@@ -65,6 +65,7 @@ export const getAllTypes = () => {
 
 export const createRecipe = (recipe) => {
   try {
+    console.log(recipe);
     return {
       type: CREATE_RECIPE,
       payload: recipe,

@@ -1,15 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./CardsFood.module.css";
 
 const CardsFood = (props) => {
   return (
-    <Link to={`/recipes/${props.id}`}>
-      <div>
-        <h3>{props.name}</h3>
-        <img src={props.image} alt={props.name} />
-        <p>{props.dietType}</p>
-      </div>
-    </Link>
+    <div className={styles.FoodCard}>
+      <img src={props.image} alt={props.name} className={styles.image} />
+      <h3>{props.name}</h3>
+
+      <h3>Diet Types:</h3>
+
+      <ul className={styles.diets}>
+        {props.dietType.map((type, index) => (
+          <li key={index}>{type}</li>
+        ))}
+      </ul>
+      <Link to={`/recipes/${props.id}`} className={styles.details}>
+        Details
+      </Link>
+    </div>
   );
 };
 

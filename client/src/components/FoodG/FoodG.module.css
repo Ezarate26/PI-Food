@@ -1,0 +1,12 @@
+.foodGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 50px;
+  padding: 50px;
+}
+
+@media (max-width: 560px) {
+  .foodGrid {
+    grid-template-columns: 100%;
+  }
+}

@@ -1,0 +1,47 @@
+.FoodCard {
+  list-style: none;
+  border: solid;
+  border-radius: 20px;
+  border-color: burlywood;
+  overflow: hidden;
+  width: 312px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  margin: 20px;
+  margin-top: 50px;
+}
+.FoodCard:hover {
+  transform: translate(10px);
+  background-color: pink;
+}
+.Link {
+  text-decoration: none;
+}
+
+.image {
+  background-color: greenyellow;
+}
+
+@media (max-width: 560px) {
+  .image {
+    width: 90%;
+    height: auto;
+    background-color: greenyellow;
+  }
+}
+.diets {
+  list-style: none;
+  text-align: left;
+  margin-top: auto;
+}
+
+.details {
+  padding: 10px 20px;
+  border: solid;
+  background-color: aqua;
+  width: 30%;
+  margin: 0 auto;
+  text-decoration: none;
+}

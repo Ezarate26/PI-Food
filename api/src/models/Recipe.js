@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       defaultValue: 0,
       validate: {
-        max: 10,
+        max: 100,
         min: 0,
       },
     },
@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       defaultValue: 0,
       validate: {
-        max: 10,
+        max: 100,
         min: 0,
       },
     },
@@ -39,6 +39,14 @@ module.exports = (sequelize) => {
     steps: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: true,
+    },
+
+    dishTypes: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.TEXT,
     },
   });
 };

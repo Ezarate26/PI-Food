@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import "./App.css";
 import FoodG from "./components/FoodG/FoodG.jsx";
 import FoodDetail from "./components/FoodDetail/FoodDetail.jsx";
-// import { getAllRecipes } from "./redux/actions/index.js";
+import NewRecipe from "./components/NewRecipe/NewRecipe";
 
 function App() {
   return (
@@ -13,6 +13,9 @@ function App() {
       </Route>
       <Route exact path="/recipes/:id">
         <FoodDetail />
+      </Route>
+      <Route exact path="/recipe">
+        <NewRecipe />
       </Route>
     </div>
   );
