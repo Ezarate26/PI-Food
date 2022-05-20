@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Righteous&display=swap");
+.landing {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  font-family: "Righteous", cursive;
+}
+
+.buttonContainer {
+  border-radius: 15px;
+  width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0px;
+  margin-left: 85px;
+  margin-top: 150px;
+
+  position: relative;
+}
+.title {
+  position: relative;
+  margin-top: 0px;
+  color: #fb02f1;
+  display: flex;
+  flex-direction: column;
+  font-size: 80px;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 4px 4px white;
+}
+
+.buttonContainer {
+  background-image: linear-gradient(
+    to right,
+    #c04848 0%,
+    #480048 51%,
+    #c04848 100%
+  );
+
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.buttonContainer:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.imageCard {
+  width: 400px;
+  height: 160px;
+  margin-top: -20px;
+  padding: 0px;
+}
+
+.button {
+  border-color: #1d2b64;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(154, 0, 255, 1) 2%,
+    rgba(251, 2, 2, 1) 93%
+  );
+  color: #e376e8;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 5px;
+  height: auto;
+}
+.button:hover {
+  transform: translate(100px);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(251, 2, 2, 1) 1%,
+    rgba(154, 0, 255, 1) 87%
+  );
+  color: white;
+}
+.videoc {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.5);
+}
+
+.btn-grad {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}

@@ -11,10 +11,12 @@
   align-content: space-between;
   margin: 20px;
   margin-top: 50px;
+  background-color: #f1b6e6;
+  color: #053865;
 }
 .FoodCard:hover {
   transform: translate(10px);
-  background-color: pink;
+  background: #d5aae4;
 }
 .Link {
   text-decoration: none;
@@ -38,10 +40,46 @@
 }
 
 .details {
-  padding: 10px 20px;
-  border: solid;
-  background-color: aqua;
-  width: 30%;
-  margin: 0 auto;
+  text-decoration: none;
+  background-image: linear-gradient(
+    to right,
+    #dae2f8 0%,
+    #d6a4a4 51%,
+    #dae2f8 100%
+  );
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.details:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-grad {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
   text-decoration: none;
 }
