@@ -7,6 +7,7 @@ const CardsFood = (props) => {
     <div className={styles.FoodCard}>
       <img src={props.image} alt={props.name} className={styles.image} />
       <h3>{props.name}</h3>
+      <h3>Healthscore: {props.healthScore}</h3>
 
       <h3>Diet Types:</h3>
 

@@ -11,24 +11,24 @@ const Search = () => {
 
   const dispatch = useDispatch();
 
+  const searchHandler = (e) => {
+    e.preventDefault();
+    if (name) {
+      history.push(`/recipes?name=${name}`);
+      dispatch(getAllRecipesByName(name));
+    }
+  };
+
   return (
     <div className={styles.searchCon}>
       <input
         className={styles.input}
         type="text"
-        placeholder="search your favorite recipe"
+        placeholder="search your recipe"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <a
-        onClick={(e) => {
-          e.preventDefault();
-          history.push(`/recipes?name=${name}`);
-          dispatch(getAllRecipesByName(name));
-        }}
-      >
-        Search
-      </a>
+      <a className={styles.search} onClick={searchHandler}></a>
     </div>
   );
 };

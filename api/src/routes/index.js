@@ -1,8 +1,9 @@
 require("dotenv").config();
 const { Router } = require("express");
 const axios = require("axios").default;
-const { API } = process.env;
+//const { API } = process.env;
 //const API = "48f825ac985b4674927decbde47c5a2d";
+const API = "0990ad0316f3448291b0d554b53418fd";
 const { Recipe, Diet } = require("../db");
 const Sequelize = require("sequelize");
 
@@ -32,7 +33,7 @@ const RecipeFormater = function (id, name, score, image, diets, dishType) {
     id: id,
     name: name,
     image: image,
-    score: score,
+    healthscore: score,
     diets: diets,
     dishType: dishType,
   };
@@ -56,7 +57,7 @@ router.get("/recipes", async function (req, res) {
       RecipeFormater(
         recipe.id,
         recipe.title,
-        recipe.spoonacularScore,
+        recipe.healthScore,
         recipe.image,
         recipe.diets,
         recipe.dishTypes

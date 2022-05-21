@@ -24,7 +24,7 @@ const LandingPage = () => {
             src={imagen}
             alt="imagen de recetas"
           />
-          <p>The best recipes</p>
+          <p className={styles.p}>The best recipes</p>
           <Link className={styles.button} to="/recipes">
             Welcome
           </Link>

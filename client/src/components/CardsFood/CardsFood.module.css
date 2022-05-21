@@ -2,7 +2,7 @@
   list-style: none;
   border: solid;
   border-radius: 20px;
-  border-color: burlywood;
+  border-color: black;
   overflow: hidden;
   width: 312px;
   justify-content: center;
@@ -11,12 +11,15 @@
   align-content: space-between;
   margin: 20px;
   margin-top: 50px;
-  background-color: #f1b6e6;
-  color: #053865;
+  background-color: white;
+  color: black;
+  text-shadow: 2px 2px #ffd600;
 }
 .FoodCard:hover {
   transform: translate(10px);
-  background: #d5aae4;
+  background: #ffd600;
+  color: white;
+  text-shadow: 2px 2px black;
 }
 .Link {
   text-decoration: none;
@@ -60,25 +63,6 @@
 }
 
 .details:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
-
-.btn-grad {
-  margin: 10px;
-  padding: 15px 45px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
-  display: block;
-}
-
-.btn-grad:hover {
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;

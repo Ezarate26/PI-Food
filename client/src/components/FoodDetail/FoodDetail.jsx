@@ -43,11 +43,15 @@ const FoodDetail = () => {
         </p>
         <p>
           <strong>Steps: </strong>
-          <ol>
-            {recipeDetail?.steps[0][1].map((step, index) => (
-              <li key={index}>{step[1]}</li>
-            ))}
-          </ol>
+          {recipeDetail?.steps[0][1].length === 0 ? (
+            "sin instrucciones"
+          ) : (
+            <ol>
+              {recipeDetail?.steps[0][1].map((step, index) => (
+                <li key={index}>{step[1]}</li>
+              ))}
+            </ol>
+          )}
         </p>
       </div>
     </div>
