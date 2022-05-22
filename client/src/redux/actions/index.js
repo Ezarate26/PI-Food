@@ -7,11 +7,11 @@ export const CREATE_RECIPE = "CREATE_RECIPE";
 export const GET_ALL_TYPES = "GET_ALL_TYPES";
 export const CHANGE_PAGE = "CHANGE_PAGE";
 export const FILTER_DIET = "FILTER_DIET";
-export const FILTER_A = "FILTER_A";
-export const FILTER_D = "FILTER_D";
+export const ALPHABET_ASC = "ALPHABET_ASC";
+export const ALPHABET_DSC = "ALPHABET_DSC";
 export const SIN_FILTERS = "SIN_FILTERS";
-export const SCORE_A = "SCORE_A";
-export const SCORE_D = "SCORE_D";
+export const HEALTHSCORE_ASC = "HEALTHSCORE_ASC";
+export const HEALTHSCORE_DSC = "HEALTHSCORE_DSC";
 
 export const getAllRecipes = () => {
   try {
@@ -70,16 +70,15 @@ export const getAllTypes = () => {
   }
 };
 
-export const createRecipe = (recipe) => {
-  try {
-    console.log(recipe);
-    return {
-      type: CREATE_RECIPE,
-      payload: recipe,
-    };
-  } catch (err) {
-    console.log(err);
-  }
+export const createRecipe = () => {
+  return async function (dispatch) {
+    try {
+      let data = await axios("http://localhost:3001/recipe");
+      return dispatch({ type: CREATE_RECIPE, payload: data.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
 
 export const onChangePage = (page) => {
@@ -90,7 +89,6 @@ export const onChangePage = (page) => {
 };
 
 export const filterByDiet = (diet) => {
-  console.log(diet);
   return {
     type: FILTER_DIET,
     payload: diet,
@@ -99,12 +97,6 @@ export const filterByDiet = (diet) => {
 
 export const order = (filter) => {
   return {
-    type: filter,
-  };
-};
-
-export const sinFilters = () => {
-  return {
-    type: SIN_FILTERS,
+    type: filter === "ORDER BY..." ? SIN_FILTERS : filter,
   };
 };

@@ -6,32 +6,40 @@ import {
   GET_ALL_TYPES,
   CHANGE_PAGE,
   FILTER_DIET,
-  FILTER_A,
-  FILTER_D,
-  SCORE_A,
-  SCORE_D,
+  ALPHABET_ASC,
+  ALPHABET_DSC,
+  HEALTHSCORE_ASC,
+  HEALTHSCORE_DSC,
   SIN_FILTERS,
 } from "../actions/index.js";
 
 const initialState = {
   recipes: [],
   filteredRecipes: [],
-
+  recipesUnOrder: [],
+  recipesAux: [],
   currentPage: 1,
   itemsperPage: 9,
   types: [],
   recipeDetail: {},
-  order: "FILTER_A",
+  orderType: false,
+  orderAsc: false,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    // case FILTER_STATUS_OR:
+    //   return {
+    //     orderAsc: action.payload,
+    //   };
+
     case GET_ALL_RECIPES:
       return {
         ...state,
         recipes: [...action.payload],
         filteredRecipes: [...action.payload],
-        filteredRecipes: [...action.payload],
+        recipesUnOrder: [...action.payload],
+        recipesAux: [...action.payload],
       };
     case GET_ALL_RECIPES_BY_NAME:
       return {
@@ -60,6 +68,12 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_DIET:
+      if (action.payload === "---- diet types ----" && !state.orderAsc) {
+        return {
+          ...state,
+          filteredRecipes: [...state.recipesAux],
+        };
+      }
       return {
         ...state,
 
@@ -71,11 +85,33 @@ const rootReducer = (state = initialState, action) => {
                   return recipe.diets.includes(action.payload);
                 }),
               ],
+
+        recipesUnOrder:
+          action.payload === "---- diet types ----"
+            ? [...state.recipesAux]
+            : [
+                ...state.recipesAux.filter((recipe) => {
+                  return recipe.diets.includes(action.payload);
+                }),
+              ],
+        orderType: action.payload === "---- diet types ----" ? false : true,
       };
-    case FILTER_A:
+    case ALPHABET_ASC:
       return {
         ...state,
 
+        recipes: [
+          ...state.recipes.sort((recipe, otherRecipe) => {
+            if (recipe.name > otherRecipe.name) {
+              return 1;
+            }
+            if (recipe.name < otherRecipe.name) {
+              return -1;
+            }
+
+            return 0;
+          }),
+        ],
         filteredRecipes: [
           ...state.filteredRecipes.sort((recipe, otherRecipe) => {
             if (recipe.name > otherRecipe.name) {
@@ -88,11 +124,24 @@ const rootReducer = (state = initialState, action) => {
             return 0;
           }),
         ],
+        orderAsc: true,
       };
-    case FILTER_D:
+    case ALPHABET_DSC:
       return {
         ...state,
 
+        recipes: [
+          ...state.recipes.sort((recipe, otherRecipe) => {
+            if (recipe.name < otherRecipe.name) {
+              return 1;
+            }
+            if (recipe.name > otherRecipe.name) {
+              return -1;
+            }
+
+            return 0;
+          }),
+        ],
         filteredRecipes: [
           ...state.filteredRecipes.sort((recipe, otherRecipe) => {
             if (recipe.name < otherRecipe.name) {
@@ -105,12 +154,24 @@ const rootReducer = (state = initialState, action) => {
             return 0;
           }),
         ],
+        orderAsc: true,
       };
-    case SCORE_A:
-      console.log("escorea");
+    case HEALTHSCORE_ASC:
       return {
         ...state,
 
+        recipes: [
+          ...state.recipes.sort((recipe, otherRecipe) => {
+            if (recipe.healthscore > otherRecipe.healthscore) {
+              return 1;
+            }
+            if (recipe.healthscore < otherRecipe.healthscore) {
+              return -1;
+            }
+
+            return 0;
+          }),
+        ],
         filteredRecipes: [
           ...state.filteredRecipes.sort((recipe, otherRecipe) => {
             if (recipe.healthscore > otherRecipe.healthscore) {
@@ -123,12 +184,24 @@ const rootReducer = (state = initialState, action) => {
             return 0;
           }),
         ],
+        orderAsc: true,
       };
-    case SCORE_D:
-      console.log("escored");
+    case HEALTHSCORE_DSC:
       return {
         ...state,
 
+        recipes: [
+          ...state.recipes.sort((recipe, otherRecipe) => {
+            if (recipe.healthscore < otherRecipe.healthscore) {
+              return 1;
+            }
+            if (recipe.healthscore > otherRecipe.healthscore) {
+              return -1;
+            }
+
+            return 0;
+          }),
+        ],
         filteredRecipes: [
           ...state.filteredRecipes.sort((recipe, otherRecipe) => {
             if (recipe.healthscore < otherRecipe.healthscore) {
@@ -141,6 +214,17 @@ const rootReducer = (state = initialState, action) => {
             return 0;
           }),
         ],
+        orderAsc: true,
+      };
+    case SIN_FILTERS:
+      console.log(state.order);
+      return {
+        ...state,
+
+        filteredRecipes: state.orderType
+          ? [...state.recipesUnOrder]
+          : [...state.recipesAux],
+        orderAsc: false,
       };
     default:
       return state;

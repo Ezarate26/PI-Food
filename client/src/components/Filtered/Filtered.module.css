@@ -1,0 +1,40 @@
+.selector {
+  top: 50%;
+  left: 50%;
+
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.selector select {
+  background-color: #480048;
+  color: azure;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.selector::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.selector select option {
+  padding: 30px;
+}

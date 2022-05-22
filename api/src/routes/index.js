@@ -29,14 +29,23 @@ const dietTypes = [
   "dairy free",
 ];
 
-const RecipeFormater = function (id, name, score, image, diets, dishType) {
+const RecipeFormater = function (
+  id,
+  name,
+  hscore,
+  image,
+  diets,
+  dishType,
+  score
+) {
   let obj = {
     id: id,
     name: name,
     image: image,
-    healthscore: score,
+    healthscore: hscore,
     diets: diets,
     dishType: dishType,
+    score: score,
   };
 
   return obj;
@@ -45,6 +54,7 @@ router.get("/recipes", async function (req, res) {
   try {
     let { name } = req.query;
     let response;
+    console.log(name);
     name
       ? (response = await axios.get(
           `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API}&query=${name}&addRecipeInformation=true&number=100`
@@ -61,7 +71,8 @@ router.get("/recipes", async function (req, res) {
         recipe.healthScore,
         recipe.image,
         recipe.diets,
-        recipe.dishTypes
+        recipe.dishTypes,
+        recipe.spoonacularScore
       )
     );
     let recipeDB;
@@ -170,16 +181,8 @@ router.get("/types", async function (req, res) {
 router.post("/recipe", async (req, res) => {
   try {
     await types();
-    let {
-      name,
-      dish_summary,
-      score,
-      healthScore,
-      steps,
-      diets,
-      image,
-      dishTypes,
-    } = req.body;
+    let { name, dish_summary, score, healthScore, steps, diets, image } =
+      req.body;
     if (!name || !dish_summary)
       return res
         .status(422)

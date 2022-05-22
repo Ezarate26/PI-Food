@@ -1,119 +1,213 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createRecipe } from "../../redux/actions/index.js";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { createRecipe } from "../../redux/actions/index";
+import styles from "./NewRecipe.module.css";
 
 const NewRecipe = () => {
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState({
+  const { types } = state;
+
+  const history = useHistory();
+  const [Diets_list, setDiets_list] = useState([]);
+
+  const [food, setfood] = useState({
     name: "",
     dish_summary: "",
-    score: 0,
-    healthScore: 0,
-
+    score: "",
+    healthScore: "",
+    steps: "",
     diets: "",
     image: "",
-    dishTypes: [],
   });
-  const [steps, setSteps] = useState([]);
-  const [step, setStep] = useState("");
 
-  const deleteStep = (stepindex) => {
-    console.log("deletedstep", step);
-    setSteps((state) => [
-      ...state.filter((step) => {
-        if (step[0] !== stepindex && step[0] < stepindex) {
-          console.log("entrastepsolito");
-          return step;
-        }
-        if (step[0] !== stepindex && step[0] > stepindex) {
-          console.log("modificaindex");
-          console.log(step[0] - 1);
-          let index = step[0];
-
-          return [index, step[1]];
-        }
-      }),
-    ]);
-  };
-  console.log(steps);
-  const stepHandler = (e) => {
-    setStep(e.target.value);
-  };
-
-  const stepsHandler = () => {
-    setSteps((state) => [...state, [state.length + 1, step]]);
-    setStep("");
-  };
-
-  const handleInputChange = (e) =>
-    setInputs({
-      ...inputs,
+  function handleOnchange(e) {
+    setfood({
+      ...food,
       [e.target.name]: e.target.value,
     });
+  }
 
-  const submithandler = (e) => {
+  function diets_selecion() {
+    setDiets_list([]);
+  }
+  function handleChooseClick(e) {
+    let newlist = [...Diets_list];
+    newlist.push(e.target.id);
+    setDiets_list(newlist);
+  }
+
+  async function handleSumit(e, volver = true) {
     e.preventDefault();
 
-    dispatch(createRecipe(inputs));
-  };
+    let data = { ...food };
+    data.diets = Diets_list;
 
+    try {
+      await axios({
+        url: "/recipe",
+        method: "Post",
+        data,
+      });
+
+      if (volver) history.push("/recipes");
+    } catch (err) {
+      console.log(err);
+    }
+
+    setfood({
+      name: "",
+      dish_summary: "",
+      score: "",
+      healthScore: "",
+      steps: "",
+      diets: "",
+      image: "",
+    });
+
+    dispatch(createRecipe());
+
+    setDiets_list([]);
+  }
+
+  function volver() {
+    history.push("/recipes");
+  }
   return (
-    <div>
-      <form onSubmit={submithandler}>
-        <label>Name: </label>
-        <input
-          name="name"
-          value={inputs.name}
-          onChange={handleInputChange}
-        ></input>
-        <label>Dish Summary: </label>
-        <textarea
-          name="dish_summary"
-          value={inputs.dish_summary}
-          onChange={handleInputChange}
-        ></textarea>
-        <label>Score: </label>
-        <input
-          type="number"
-          name="score"
-          value={inputs.score}
-          onChange={handleInputChange}
-        ></input>
-        <label>HealthScore: </label>
-        <input
-          type="number"
-          name="healthScore"
-          value={inputs.healthScore}
-          onChange={handleInputChange}
-        ></input>
-        <label>Steps: </label>
-        <input name="steps" value={step} onChange={stepHandler}></input>
-        <button onClick={stepsHandler}>Agregar</button>
-        <div>
-          {steps.map((step) => (
-            <div>
-              {step[0]}.- {step[1]}
-              <button onClick={() => deleteStep(step[0])}>X</button>
-            </div>
-          ))}
+    <div className={styles.addRecipe}>
+      <form onSubmit={handleSumit} className={styles.formulario}>
+        <h2>AGREGAR PLATO</h2>
+        <div className={styles.form_inputs}>
+          <label>Nombre Del Plato: </label>
+          <input
+            className={styles.inputs}
+            name="title"
+            type="text"
+            value={food.title}
+            onChange={handleOnchange}
+            required
+          />
         </div>
+        <div className={styles.form_inputs}>
+          <label>Resumen Del Plato: </label>
+          <textarea
+            className={styles.textarea}
+            name="summary"
+            type="text"
+            rows="10"
+            cols="50"
+            value={food.summary}
+            onChange={handleOnchange}
+            required
+          />
+        </div>
+        <div className={styles.form_inputs}>
+          <label>Puntuacion: </label>
+          <input
+            className={styles.inputs}
+            name="Puntuation"
+            type="number"
+            max="10"
+            min="1"
+            value={food.Puntuation}
+            placeholder="Puntuacion Del 1 a 10"
+            onChange={handleOnchange}
+            required
+          />
+        </div>
+        <div className={styles.form_inputs}>
+          <label>Nivel de comida saludable : </label>
+          <input
+            className="inputs"
+            name="lvl_healthScore"
+            type="number"
+            max="100"
+            min="1"
+            value={food.lvl_healthScore}
+            placeholder="Calificacion de 1 a 100"
+            onChange={handleOnchange}
+            required
+          />
+        </div>
+        <div className={styles.form_inputs}>
+          <label>Paso a paso: </label>
+          <textarea
+            className="textarea"
+            name="instructions"
+            type="text"
+            rows="10"
+            cols="15"
+            value={food.instructions}
+            onChange={handleOnchange}
+            required
+          />
+        </div>
+        <div className={styles.form_inputs}>
+          <label>Url de imagen: </label>
 
-        <label>Diets: </label>
-        <textarea
-          name="diets"
-          value={inputs.diets}
-          onChange={handleInputChange}
-        ></textarea>
-        <label>Dish Types: </label>
-        <textarea
-          name="dishTypes"
-          value={inputs.dishTypes}
-          onChange={handleInputChange}
-        ></textarea>
-        <label>Imagen: </label>
-        <input name="image" value={inputs.image} onChange={handleInputChange} />
-
-        <button type="submit">Create Recipe</button>
+          <input
+            className={styles.inputs}
+            type="url"
+            name="image"
+            value={food.image}
+            onChange={handleOnchange}
+            required
+          />
+        </div>
+        <div>
+          <h2>Dietas</h2>
+          <div className={styles.dietasSeleccion}>
+            <ul>
+              {types.map((e, i) => (
+                <div key={i}>
+                  <label
+                    onClick={handleChooseClick}
+                    id={e}
+                    className={
+                      Diets_list.includes(e) ? styles.dieta1 : styles.dieta2
+                    }
+                  >
+                    {e}
+                  </label>
+                </div>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.addRecipeaddbutton}>
+            <button
+              type="button"
+              onClick={diets_selecion}
+              className={styles.add_button}
+            >
+              Borrar Selecionados
+            </button>
+          </div>
+        </div>
+        <div>
+          <div className={styles.addbutton}>
+            <button type="submit" className={styles.add_button}>
+              CREAR Y VOLVER
+            </button>
+            <button
+              type={styles.button}
+              onClick={(e) => handleSumit(e, false)}
+              className={styles.add_button}
+            >
+              CREAR Y CREAR NUEVA
+            </button>
+          </div>
+          <div className={styles.addbutton}>
+            <button
+              type="button"
+              onClick={volver}
+              className={styles.add_button}
+            >
+              Volver
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );

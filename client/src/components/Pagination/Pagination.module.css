@@ -5,12 +5,20 @@
 }
 .numPages li {
   border: solid;
-  border-radius: 1px;
-  border-color: black;
+  border-radius: 5px;
+  border-color: #c04848;
+  background-color: #480048;
   margin-left: 5px;
   padding: 5px;
+  color: azure;
+  text-shadow: #ffd600;
 }
 
 .numPages .currentPage {
-  border-color: aqua;
+  border: solid 4px;
+  border-color: #c04848;
+  background-color: #fb02f1;
+  border-radius: 5px;
+  color: azure;
+  text-shadow: #ffd600;
 }

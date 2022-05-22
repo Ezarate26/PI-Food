@@ -1,34 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { order } from "../../redux/actions/index";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import styles from "./Filtered.module.css";
 
-const FilteredByAlpha = () => {
+const FilteredByOrder = () => {
   const dispatch = useDispatch();
 
-  const filtereds = useSelector((state) => state.filteredRecipes);
-  const statefilter = useSelector((state) => state.order);
-
-  useEffect(() => {
-    console.log(statefilter);
-    dispatch(order(statefilter));
-  }, []);
-
   const onFilterByA = (value) => {
+    if (value === "ORDER BY...") {
+      dispatch(order(value));
+    }
+
     dispatch(order(value));
   };
 
   return (
-    <div>
-      <center>
-        <select onChange={(e) => onFilterByA(e.target.value)}>
-          <option default> ---- Alphabetical Order ---- </option>
+    <div className={styles.selector}>
+      <select onChange={(e) => onFilterByA(e.target.value.toUpperCase())}>
+        <option default>Order By...</option>
 
-          <option>FILTER_A</option>
-          <option>FILTER_D</option>
-        </select>
-      </center>
+        <option>Alphabet_ASC</option>
+        <option>Alphabet_DSC</option>
+        <option>HealthScore_ASC</option>
+        <option>HealthScore_DSC</option>
+      </select>
     </div>
   );
 };
 
-export default FilteredByAlpha;
+export default FilteredByOrder;

@@ -16,44 +16,54 @@ const FoodDetail = () => {
 
   return (
     <div className={styles.recipeDetails}>
-      <img
-        className={styles.col}
-        src={recipeDetail?.image}
-        alt={recipeDetail?.name}
-      />
+      {recipeDetail ? (
+        <div className={styles.info}>
+          <h1>{recipeDetail.name}</h1>
+          <div className={styles.img_diets}>
+            <img
+              className={styles.image}
+              src={recipeDetail.image}
+              alt={recipeDetail.name}
+            />
+          </div>
 
-      <div className={styles.col}>
-        <h3>{recipeDetail?.name}</h3>
-        <p>
-          <strong>Summary: </strong> {recipeDetail?.dish_summary}
-        </p>
-        <p>
-          <strong>Dishtypes: {recipeDetail?.dishTypes} </strong>
-        </p>
-        {/* <h4>
-        <strong>Score: </strong>
-        {recipeDetail?.score}
-      </h4> */}
-        <p>
-          <strong>Diets: </strong>
-          {recipeDetail?.diets}
-        </p>
-        <p>
-          <strong>HealthScore: {recipeDetail?.healthScore}</strong>
-        </p>
-        <p>
-          <strong>Steps: </strong>
-          {recipeDetail?.steps[0][1].length === 0 ? (
+          <div className={styles.subtitle}>DISH TYPES: </div>
+          <ul>
+            {recipeDetail.dishTypes?.map((e, i) => (
+              <li key={i}>{e} </li>
+            ))}
+          </ul>
+
+          <div className={styles.subtitle}>DIET TYPES: </div>
+          <div>
+            <ul>
+              {recipeDetail.diets.map((e, i) => (
+                <li key={i}>{e} </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.subtitle}>SUMMARY :</div>
+          <div className={styles.text_p}>{recipeDetail.summary}</div>
+          <div className={styles.subtitle}>SCORE: </div>
+          <div className={styles.text}>{recipeDetail.score}</div>
+
+          <div className={styles.subtitle}>NIVEL DE COMIDA SALUDABLE :</div>
+          <div className={styles.text}>{recipeDetail.healthscore}</div>
+
+          <div className={styles.subtitle}>Steps: </div>
+          {recipeDetail.steps[0][1].length === 0 ? (
             "sin instrucciones"
           ) : (
-            <ol>
-              {recipeDetail?.steps[0][1].map((step, index) => (
+            <ol className={styles.text}>
+              {recipeDetail.steps[0][1].map((step, index) => (
                 <li key={index}>{step[1]}</li>
               ))}
             </ol>
           )}
-        </p>
-      </div>
+        </div>
+      ) : (
+        <h1>Loading ...</h1>
+      )}
     </div>
   );
 };

@@ -1,0 +1,105 @@
+.addRecipe {
+  display: flex;
+  justify-content: center;
+  background-color: azure;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #480048;
+  border-radius: 10px;
+  border-color: #480048;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.formulario h2 {
+  margin-top: 10%;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.formulario div {
+  margin: 8px;
+}
+
+.formulario ul {
+  text-align: center;
+}
+
+.addbutton {
+  display: flex;
+  justify-content: center;
+}
+
+.inputs {
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-color: #fb02f1;
+  background-color: transparent;
+}
+
+.inputs:hover {
+  background-color: #edf0f3;
+}
+
+.form_inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.textarea {
+  width: 300px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-color: #fb02f1;
+  background-color: transparent;
+}
+
+.textarea:hover {
+  background-color: #edf0f3;
+}
+
+.add_button {
+  color: white;
+  background-color: #fb02f1;
+  transition: 0.4s ease all;
+}
+
+.add_button:hover {
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
+  background-color: white;
+  color: #fb02f1;
+  transition: 0.4s ease all;
+}
+
+.dietasSeleccion label {
+  cursor: pointer;
+  padding: auto;
+  border: #fb02f1;
+}
+
+.dieta1 {
+  color: #fb02f1;
+}
+
+.dieta2 {
+  color: black;
+}
+
+.dieta2:hover {
+  color: #fb02f1;
+}
+
+label {
+  text-shadow: 1px 1px black;
+  font-size: 1.3rem;
+  font-weight: bold;
+}

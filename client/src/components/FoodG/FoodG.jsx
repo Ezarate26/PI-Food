@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import CardsFood from "../CardsFood/CardsFood.jsx";
 import Search from "../Search/Search.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
-import FilteredByAlpha from "../Filtered/FilteredByAlpha.jsx";
-import FilteredByScore from "../Filtered/FilteredByHScore";
+import FilteredByOrder from "../Filtered/FilteredByAlpha.jsx";
+
 import imageF from "../../assets/raspberries-2023404_1920.jpg";
 import styles from "./FoodG.module.css";
 import FilteredByType from "../Filtered/Filtered.jsx";
@@ -20,8 +20,6 @@ const FoodG = () => {
   const startIndex = lastIndex - itemsperPage;
 
   const arrayRecipesperPage = filteredRecipes.slice(startIndex, lastIndex);
-
-  console.log("aaa", arrayRecipesperPage);
 
   useEffect(() => {
     if (filteredRecipes.length === 0) {
@@ -42,14 +40,18 @@ const FoodG = () => {
             <Search />
           </div>
         </div>
-        <div>
-          <Pagination />
+
+        <div className={styles.buttons}>
+          <div className={styles.pagination}>
+            <Pagination />
+          </div>
+          <div className={styles.filters}>
+            <FilteredByType />
+
+            <FilteredByOrder />
+          </div>
         </div>
-        <FilteredByType />
 
-        <FilteredByAlpha />
-
-        <FilteredByScore />
         <div className={styles.foodGrid}>
           {arrayRecipesperPage.map((recipe) => (
             <CardsFood
