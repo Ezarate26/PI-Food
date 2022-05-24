@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import axios from "axios";
 import Search from "../Search/Search";
 import { useSelector, useDispatch } from "react-redux";
 import { createRecipe } from "../../redux/actions/index";
@@ -75,7 +74,6 @@ const NewRecipe = () => {
   function diets_selecion() {
     setDiets_list([]);
   }
-  console.log(errors);
 
   function handleChooseClick(e) {
     let newlist = [...Diets_list];

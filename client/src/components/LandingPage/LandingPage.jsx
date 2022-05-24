@@ -11,9 +11,9 @@ const LandingPage = () => {
         className={styles.videoc}
         src={video}
         type="video/mp4"
-        autoplay="true"
-        muted="true"
-        loop="true"
+        loop
+        autoPlay
+        muted
       ></video>
       <div className={styles.overlay}> </div>
       <div>

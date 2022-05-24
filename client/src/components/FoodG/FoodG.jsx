@@ -1,13 +1,9 @@
 import { getAllRecipes, getAllTypes } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 import CardsFood from "../CardsFood/CardsFood.jsx";
-import Search from "../Search/Search.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import FilteredByOrder from "../Filtered/FilteredByAlpha.jsx";
-import Nav from "../Nav/Nav.jsx";
-import imageF from "../../assets/raspberries-2023404_1920.jpg";
 import styles from "./FoodG.module.css";
 import FilteredByType from "../Filtered/Filtered.jsx";
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getAllRecipesByName } from "../../redux/actions/index.js";
 import { useHistory } from "react-router-dom";
 
@@ -26,7 +26,7 @@ const Search = () => {
         type="text"
         placeholder="search your recipe"
         value={name}
-        onChange={(e) => setName(e.target.value.toLowerCase())}
+        onChange={(e) => setName(e.target.value)}
       />
       <a className={styles.search} onClick={searchHandler}></a>
     </div>
