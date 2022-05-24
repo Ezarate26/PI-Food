@@ -3,7 +3,7 @@ const { Router } = require("express");
 const axios = require("axios").default;
 const { API } = process.env;
 //const API = "48f825ac985b4674927decbde47c5a2d";
-//const API = "0990ad0316f3448291b0d554b53418fd";
+//onst API = "0990ad0316f3448291b0d554b53418fd";
 const { Recipe, Diet } = require("../db");
 const Sequelize = require("sequelize");
 
@@ -15,17 +15,17 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const dietTypes = [
-  "Gluten Free",
-  "Ketogenic",
-  "Vegetarian",
-  "Lacto Ovo Vegetarian",
-  "Ovo-Vegetarian",
-  "Vegan",
-  "Pescetarian",
-  "Paleolithic",
-  "Primal",
-  "Low FODMAP",
-  "Whole 30",
+  "gluten free",
+  "ketogenic",
+  "vegetarian",
+  "lacto ovo vegetarian",
+  "ovo-vegetarian",
+  "vegan",
+  "pescetarian",
+  "paleolithic",
+  "primal",
+  "low fodmap",
+  "whole 30",
   "dairy free",
 ];
 
@@ -75,17 +75,29 @@ router.get("/recipes", async function (req, res) {
         recipe.spoonacularScore
       )
     );
+
     let recipeDB;
     if (name) {
       recipeDB = await Recipe.findAll({
         where: {
           name: name,
         },
+        include: {
+          model: Diet,
+        },
       });
-      if (recipeDB.length > 0) recipeDB.map((recipe) => recipes.push(recipe));
     } else {
-      recipeDB = await Recipe.findAll();
-      if (recipeDB.length > 0) recipeDB.map((recipe) => recipes.push(recipe));
+      recipeDB = await Recipe.findAll({
+        include: {
+          model: Diet,
+        },
+      });
+    }
+
+    if (recipes.length > 0 && recipeDB.length > 0) {
+      recipes = [...recipes, ...recipeDB];
+    } else if (recipes.length === 0 && recipeDB.length > 0) {
+      recipes = [...recipeDB];
     }
 
     res.send(recipes);
@@ -101,7 +113,7 @@ router.get("/recipes/:id", async function (req, res) {
     if (id.includes("-")) {
       item = await Recipe.findAll({
         where: {
-          ID: id,
+          id: id,
         },
         include: {
           model: Diet,
@@ -142,12 +154,12 @@ router.get("/recipes/:id", async function (req, res) {
       id: data.id,
       dish_summary: text,
       dishTypes: data.dishTypes,
-      score: data.spoonacularScore,
+      score: data.spoonacularScore ? data.spoonacularScore : 10,
       diets: filtered,
       healthScore: data.healthScore,
       steps: stepsFormated,
     };
-    console.log(obj);
+
     res.send(obj);
   } catch (error) {
     res.status(404).send({ error: error.message });
@@ -179,49 +191,31 @@ router.get("/types", async function (req, res) {
 });
 
 router.post("/recipe", async (req, res) => {
-  try {
-    await types();
-    let { name, dish_summary, score, healthScore, steps, diets, image } =
-      req.body;
-    if (!name || !dish_summary)
-      return res
-        .status(422)
-        .json({ message: "name and dish_summary required" });
-    if (score < 0 || score > 10)
-      return res.status(422).send({ message: "score must be between 0 -10" });
-    if (healthScore < 0 || healthScore > 10)
-      return res
-        .status(422)
-        .json({ message: "healtScore must be between 0 -10" });
-    score = score ? score : 0;
-    healthScore = healthScore ? healthScore : 0;
+  let { name, dish_summary, score, healthScore, steps, diets, image } =
+    req.body;
 
-    let newRecipe = await Recipe.create({
-      name,
-      dish_summary,
-      score: score,
-      healthScore: healthScore,
-      steps,
-      image,
-      dishTypes,
+  let newRecipe = {
+    name,
+    dish_summary,
+    score,
+    healthscore: healthScore,
+    steps,
+    image,
+  };
+
+  try {
+    let recipeC = await Recipe.create({
+      ...newRecipe,
     });
 
-    let formated = Array.isArray(diets) ? diets : [diets];
+    diets.map(async (e) => {
+      let id_diet = await Diet.findAll({ where: { name: e } });
+      await recipeC.addDiet(id_diet);
+    });
 
-    const matchingDiets = formated.map(
-      async (diet) =>
-        await Diet.findAll({
-          where: {
-            name: diet,
-          },
-        })
-    );
-    let result = await Promise.all(matchingDiets);
-
-    result.map(async (match) => await newRecipe.setDiets(match));
-
-    res.status(201).json(newRecipe);
+    res.status(201).json("newRecipe");
   } catch (error) {
+    console.log(error);
     res.status(404).send({ error: error.message });
   }
 });

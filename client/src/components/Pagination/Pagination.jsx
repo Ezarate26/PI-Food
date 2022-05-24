@@ -15,16 +15,22 @@ const Pagination = () => {
   for (let i = 0; i < cards; i++) {
     numPage.push(i + 1);
   }
+
+  if (numPage.length < currentPage) {
+    dispatch(onChangePage(numPage.length));
+  }
+
   const onChangeP = (page) => {
     dispatch(onChangePage(page));
   };
 
   return (
     <ul className={styles.numPages}>
-      {numPage.map((page) => (
+      {numPage.map((page, i) => (
         <li
+          key={i}
           onClick={() => onChangeP(page)}
-          className={page == currentPage ? styles.currentPage : ""}
+          className={page === currentPage ? styles.currentPage : ""}
         >
           {page}
         </li>

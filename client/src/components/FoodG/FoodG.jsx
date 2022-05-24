@@ -6,7 +6,7 @@ import CardsFood from "../CardsFood/CardsFood.jsx";
 import Search from "../Search/Search.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import FilteredByOrder from "../Filtered/FilteredByAlpha.jsx";
-
+import Nav from "../Nav/Nav.jsx";
 import imageF from "../../assets/raspberries-2023404_1920.jpg";
 import styles from "./FoodG.module.css";
 import FilteredByType from "../Filtered/Filtered.jsx";
@@ -22,25 +22,13 @@ const FoodG = () => {
   const arrayRecipesperPage = filteredRecipes.slice(startIndex, lastIndex);
 
   useEffect(() => {
-    if (filteredRecipes.length === 0) {
-      dispatch(getAllRecipes());
-      dispatch(getAllTypes());
-    }
+    dispatch(getAllRecipes());
+    dispatch(getAllTypes());
   }, []);
 
   return (
     <div>
       <div>
-        <div className={styles.encabezado}>
-          <Link className={styles.newRecipe} to="/recipe">
-            Create Recipe
-          </Link>
-          <h1 className={styles.tittle}>Recipes</h1>
-          <div>
-            <Search />
-          </div>
-        </div>
-
         <div className={styles.buttons}>
           <div className={styles.pagination}>
             <Pagination />
@@ -53,7 +41,7 @@ const FoodG = () => {
         </div>
 
         <div className={styles.foodGrid}>
-          {arrayRecipesperPage.map((recipe) => (
+          {arrayRecipesperPage.map((recipe, i) => (
             <CardsFood
               key={recipe.id}
               id={recipe.id}

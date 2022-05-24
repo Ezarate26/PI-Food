@@ -12,9 +12,13 @@ const CardsFood = (props) => {
       <h3>Diet Types:</h3>
 
       <ul className={styles.diets}>
-        {props.dietType.map((type, index) => (
-          <li key={index}>{type}</li>
-        ))}
+        {props.dietType.map((type, index) =>
+          type.name ? (
+            <li key={index}>{type.name}</li>
+          ) : (
+            <li key={index}>{type}</li>
+          )
+        )}
       </ul>
       <Link to={`/recipes/${props.id}`} className={styles.details}>
         Details

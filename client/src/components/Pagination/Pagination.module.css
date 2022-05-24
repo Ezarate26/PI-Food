@@ -14,6 +14,10 @@
   text-shadow: #ffd600;
 }
 
+.numPages li:hover {
+  cursor: pointer;
+}
+
 .numPages .currentPage {
   border: solid 4px;
   border-color: #c04848;

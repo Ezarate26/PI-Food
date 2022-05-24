@@ -28,11 +28,6 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case FILTER_STATUS_OR:
-    //   return {
-    //     orderAsc: action.payload,
-    //   };
-
     case GET_ALL_RECIPES:
       return {
         ...state,
@@ -44,7 +39,11 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_RECIPES_BY_NAME:
       return {
         ...state,
+
         recipes: [...action.payload],
+        filteredRecipes: [...action.payload],
+        recipesUnOrder: [...action.payload],
+        recipesAux: [...action.payload],
       };
     case GET_RECIPES_BY_ID:
       return {
@@ -72,6 +71,8 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           filteredRecipes: [...state.recipesAux],
+          filteredRecipes: [...state.recipesAux],
+          recipesUnOrder: [...state.recipesAux],
         };
       }
       return {
@@ -102,7 +103,7 @@ const rootReducer = (state = initialState, action) => {
 
         recipes: [
           ...state.recipes.sort((recipe, otherRecipe) => {
-            if (recipe.name > otherRecipe.name) {
+            if (recipe.name.toLowerCase() > otherRecipe.name.toLowerCase()) {
               return 1;
             }
             if (recipe.name < otherRecipe.name) {
@@ -114,10 +115,10 @@ const rootReducer = (state = initialState, action) => {
         ],
         filteredRecipes: [
           ...state.filteredRecipes.sort((recipe, otherRecipe) => {
-            if (recipe.name > otherRecipe.name) {
+            if (recipe.name.toLowerCase() > otherRecipe.name.toLowerCase()) {
               return 1;
             }
-            if (recipe.name < otherRecipe.name) {
+            if (recipe.name.toLowerCase() < otherRecipe.name.toLowerCase()) {
               return -1;
             }
 
@@ -132,10 +133,10 @@ const rootReducer = (state = initialState, action) => {
 
         recipes: [
           ...state.recipes.sort((recipe, otherRecipe) => {
-            if (recipe.name < otherRecipe.name) {
+            if (recipe.name.toLowerCase() < otherRecipe.name.toLowerCase()) {
               return 1;
             }
-            if (recipe.name > otherRecipe.name) {
+            if (recipe.name.toLowerCase() > otherRecipe.name.toLowerCase()) {
               return -1;
             }
 
@@ -144,10 +145,10 @@ const rootReducer = (state = initialState, action) => {
         ],
         filteredRecipes: [
           ...state.filteredRecipes.sort((recipe, otherRecipe) => {
-            if (recipe.name < otherRecipe.name) {
+            if (recipe.name.toLowerCase() < otherRecipe.name.toLowerCase()) {
               return 1;
             }
-            if (recipe.name > otherRecipe.name) {
+            if (recipe.name.toLowerCase() > otherRecipe.name.toLowerCase()) {
               return -1;
             }
 
@@ -220,6 +221,9 @@ const rootReducer = (state = initialState, action) => {
       console.log(state.order);
       return {
         ...state,
+        recipes: state.orderType
+          ? [...state.recipesUnOrder]
+          : [...state.recipesAux],
 
         filteredRecipes: state.orderType
           ? [...state.recipesUnOrder]

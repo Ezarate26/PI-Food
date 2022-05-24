@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    ID: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
 
@@ -22,12 +22,12 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       defaultValue: 0,
       validate: {
-        max: 100,
+        max: 10,
         min: 0,
       },
     },
 
-    healthScore: {
+    healthscore: {
       type: DataTypes.FLOAT,
       defaultValue: 0,
       validate: {
@@ -37,14 +37,10 @@ module.exports = (sequelize) => {
     },
 
     steps: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.TEXT,
       allowNull: true,
     },
 
-    dishTypes: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
-      allowNull: false,
-    },
     image: {
       type: DataTypes.TEXT,
     },

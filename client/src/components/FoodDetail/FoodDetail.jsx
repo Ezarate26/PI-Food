@@ -6,13 +6,20 @@ import styles from "./FoodDetail.module.css";
 
 const FoodDetail = () => {
   const dispatch = useDispatch();
-  const recipeDetail = useSelector((state) => state.recipeDetail);
+  const infoDetails = useSelector((state) => state.recipeDetail);
   const params = useParams();
   const id = params.id;
-
+  let recipeDetail;
   useEffect(() => {
-    dispatch(getRecipeDetail(id));
+    if (infoDetails) dispatch(getRecipeDetail(id));
   }, []);
+  if (Array.isArray(infoDetails)) {
+    recipeDetail = infoDetails[0];
+  } else {
+    recipeDetail = infoDetails;
+  }
+
+  console.log("details", recipeDetail);
 
   return (
     <div className={styles.recipeDetails}>
@@ -26,36 +33,34 @@ const FoodDetail = () => {
               alt={recipeDetail.name}
             />
           </div>
-
           <div className={styles.subtitle}>DISH TYPES: </div>
           <ul>
             {recipeDetail.dishTypes?.map((e, i) => (
               <li key={i}>{e} </li>
             ))}
           </ul>
-
           <div className={styles.subtitle}>DIET TYPES: </div>
           <div>
             <ul>
-              {recipeDetail.diets.map((e, i) => (
-                <li key={i}>{e} </li>
-              ))}
+              {recipeDetail.diets?.map((e, i) =>
+                e.name ? <li key={i}>{e.name} </li> : <li key={i}>{e} </li>
+              )}
             </ul>
           </div>
           <div className={styles.subtitle}>SUMMARY :</div>
-          <div className={styles.text_p}>{recipeDetail.summary}</div>
+          <div className={styles.text_p}>{recipeDetail.dish_summary}</div>
           <div className={styles.subtitle}>SCORE: </div>
           <div className={styles.text}>{recipeDetail.score}</div>
-
-          <div className={styles.subtitle}>NIVEL DE COMIDA SALUDABLE :</div>
-          <div className={styles.text}>{recipeDetail.healthscore}</div>
-
+          <div className={styles.subtitle}>Health Score:</div>
+          <div className={styles.text}>{recipeDetail.healthScore}</div>
           <div className={styles.subtitle}>Steps: </div>
-          {recipeDetail.steps[0][1].length === 0 ? (
-            "sin instrucciones"
+          {!Array.isArray(recipeDetail.steps) ? (
+            recipeDetail.steps
+          ) : recipeDetail.steps?.length === 0 ? (
+            "the recipe has no procedure"
           ) : (
             <ol className={styles.text}>
-              {recipeDetail.steps[0][1].map((step, index) => (
+              {recipeDetail.steps[0][1]?.map((step, index) => (
                 <li key={index}>{step[1]}</li>
               ))}
             </ol>

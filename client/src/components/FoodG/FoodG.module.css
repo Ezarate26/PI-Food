@@ -11,36 +11,6 @@
   }
 }
 
-.encabezado {
-  background-image: url("../../assets/raspberries-2023404_1920.jpg");
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: "Righteous", cursive;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  height: 200px;
-}
-.newRecipe {
-  margin-left: 60px;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: #ffd600;
-}
-.newRecipe:hover {
-  color: #ffd600;
-  background-color: white;
-}
-.tittle {
-  font-size: 80px;
-  text-shadow: 4px 4px #ffd600;
-  color: azure;
-  margin: 0 auto;
-  margin-left: 300px;
-}
-
 body {
   background: linear-gradient(
     90deg,
@@ -72,5 +42,5 @@ body {
 }
 
 .buttons {
-  padding: 15px;
+  padding-bottom: 20px;
 }

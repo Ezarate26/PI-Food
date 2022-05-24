@@ -18,8 +18,8 @@ const FilteredByType = () => {
       <select onChange={(e) => onFilterByType(e.target.value.toLowerCase())}>
         <option default> ---- Diet Types ---- </option>
 
-        {filterTypes.map((item) => (
-          <option>{item.name}</option>
+        {filterTypes.map((item, i) => (
+          <option key={i}>{item.name}</option>
         ))}
       </select>
     </div>

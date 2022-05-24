@@ -5,10 +5,14 @@ import FoodG from "./components/FoodG/FoodG.jsx";
 import FoodDetail from "./components/FoodDetail/FoodDetail.jsx";
 import NewRecipe from "./components/NewRecipe/NewRecipe";
 import LandingPage from "./components/LandingPage/LandingPage";
+import Nav from "./components/Nav/Nav";
 
 function App() {
   return (
     <div className="App">
+      <Route path="/recipes">
+        <Nav />
+      </Route>
       <Route exact path="/">
         <LandingPage />
       </Route>

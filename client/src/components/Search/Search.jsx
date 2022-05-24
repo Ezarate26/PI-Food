@@ -26,7 +26,7 @@ const Search = () => {
         type="text"
         placeholder="search your recipe"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value.toLowerCase())}
       />
       <a className={styles.search} onClick={searchHandler}></a>
     </div>
