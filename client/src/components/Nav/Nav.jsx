@@ -9,7 +9,7 @@ const Nav = () => {
       <Link className={styles.newRecipe} to="/recipe">
         Create Recipe
       </Link>
-      <Link to="/recipe" className={styles.tittle}>
+      <Link to="/recipes" className={styles.tittle}>
         <h1>Recipes</h1>
       </Link>
       <div>

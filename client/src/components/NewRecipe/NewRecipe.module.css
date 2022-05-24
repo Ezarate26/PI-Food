@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   background-color: azure;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 15%;
+  margin-right: 15%;
   font-weight: bold;
   text-transform: uppercase;
   color: #480048;
@@ -49,12 +49,14 @@
 }
 
 .form_inputs {
+  font-size: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .textarea {
   width: 300px;
+  height: 100px;
   border-radius: 5px;
   font-size: 1.2rem;
   font-weight: bold;
@@ -102,4 +104,41 @@ label {
   text-shadow: 1px 1px black;
   font-size: 1.3rem;
   font-weight: bold;
+}
+.danger {
+  color: red;
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-color: red;
+  background-color: transparent;
+}
+
+.encabezado {
+  background-image: url("../../assets/raspberries-2023404_1920.jpg");
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Righteous", cursive;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 200px;
+}
+
+.tittle {
+  font-size: 40px;
+  text-shadow: 4px 4px #ffd600;
+  color: azure;
+  margin: 0 auto;
+
+  margin-left: 500px;
+  text-decoration: none;
+}
+
+.tittle:hover {
+  color: #ffd600;
+  text-shadow: 4px 4px azure;
 }
