@@ -1,8 +1,8 @@
 require("dotenv").config();
 const { Router } = require("express");
 const axios = require("axios").default;
-//const { API } = process.env;
-const API = "cb67288800d94841aae904566cf6f881";
+const { API } = process.env;
+
 const { Recipe, Diet } = require("../db");
 const Sequelize = require("sequelize");
 
