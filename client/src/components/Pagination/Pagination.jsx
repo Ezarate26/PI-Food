@@ -16,10 +16,6 @@ const Pagination = () => {
     numPage.push(i + 1);
   }
 
-  if (numPage.length < currentPage) {
-    dispatch(onChangePage(numPage.length));
-  }
-
   const onChangeP = (page) => {
     dispatch(onChangePage(page));
   };
