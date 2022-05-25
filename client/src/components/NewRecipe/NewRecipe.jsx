@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import Search from "../Search/Search";
+
 import { useSelector, useDispatch } from "react-redux";
 import { createRecipe } from "../../redux/actions/index";
 import styles from "./NewRecipe.module.css";
@@ -121,9 +121,7 @@ const NewRecipe = () => {
         <Link to="/recipes" className={styles.tittle}>
           <h1>Recipes</h1>
         </Link>
-        <div>
-          <Search />
-        </div>
+        
       </div>
       <div className={styles.addRecipe}>
         <form onSubmit={handleSumit} className={styles.formulario}>

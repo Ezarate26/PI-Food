@@ -2,7 +2,7 @@ require("dotenv").config();
 const { Router } = require("express");
 const axios = require("axios").default;
 const { API } = process.env;
-
+const {API_KEY} = process.env
 const { Recipe, Diet } = require("../db");
 const Sequelize = require("sequelize");
 
@@ -207,6 +207,7 @@ router.post("/recipe", async (req, res) => {
       ...newRecipe,
     });
 
+    console.log(diets)
     diets.map(async (e) => {
       let id_diet = await Diet.findAll({ where: { name: e } });
       await recipeC.addDiet(id_diet);

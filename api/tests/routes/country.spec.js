@@ -7,9 +7,7 @@ const { Recipe, conn } = require("../../src/db");
 const agent = session(app);
 
 describe("Recipe routes", () => {
-  describe("GET /recipes", () => {
-    it("should get 100", () => agent.get("/recipes").expect(200));
-  });
+
 
   describe("POST /recipe", () => {
     it("should get 404 if we dont send data", () =>

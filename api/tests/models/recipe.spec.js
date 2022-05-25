@@ -15,19 +15,19 @@ describe("Recipe model", () => {
           .then(() => done(new Error("It requires a valid title")))
           .catch(() => done());
       });
-      it("should work when its a valid title", () => {
+      it("should work when its a valid name", () => {
         Recipe.create({ name: "Milanesa a la napolitana" });
       });
-      it("should work when its a valid summary", () => {
+      it("should work when its a valid dish_summary", () => {
         Recipe.create({ dish_summary: "Resumen milanesa a la napolitana" });
       });
-      it("should work when its a valid Puntuation", () => {
+      it("should work when its a valid score", () => {
         Recipe.create({ score: 10 });
       });
-      it("should work when its a valid lvl_healthScore", () => {
+      it("should work when its a valid healthscore", () => {
         Recipe.create({ healthscore: 10 });
       });
-      it("should work when its a valid instructions", () => {
+      it("should work when its a valid steps", () => {
         Recipe.create({ steps: "Pasos a seguir para la creacion" });
       });
     });

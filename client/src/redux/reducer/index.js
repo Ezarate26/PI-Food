@@ -83,7 +83,16 @@ const rootReducer = (state = initialState, action) => {
             ? [...state.recipes]
             : [
                 ...state.recipes.filter((recipe) => {
-                  return recipe.diets.includes(action.payload);
+                  if(recipe.diets.length > 0 && recipe.diets[0].name ){
+              
+                    
+                    recipe.diets = [...recipe.diets.map(diet => diet.name)]
+                
+                  }
+                
+                 
+                 return recipe.diets.includes(action.payload);
+                
                 }),
               ],
 
@@ -92,7 +101,17 @@ const rootReducer = (state = initialState, action) => {
             ? [...state.recipesAux]
             : [
                 ...state.recipesAux.filter((recipe) => {
+
+                  if( recipe.diets.length > 0 &&recipe.diets[0].name){
+              
+                  
+                  recipe.diets = [...recipe.diets.map(diet => diet.name)]
+                  
+                }
+                
                   return recipe.diets.includes(action.payload);
+                 
+                 
                 }),
               ],
         orderType: action.payload === "---- diet types ----" ? false : true,
