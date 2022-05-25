@@ -11,6 +11,7 @@ import {
   HEALTHSCORE_ASC,
   HEALTHSCORE_DSC,
   SIN_FILTERS,
+  ORDER_PI
 } from "../actions/index.js";
 
 const initialState = {
@@ -249,6 +250,14 @@ const rootReducer = (state = initialState, action) => {
           : [...state.recipesAux],
         orderAsc: false,
       };
+
+      case ORDER_PI:
+        return {
+          ...state,
+          recipes: [...state.recipes.filter(recipe => recipe.healthscore > 80)],
+
+          filteredRecipes:  [...state.recipes.filter(recipe => recipe.healthscore > 80)]
+        }
     default:
       return state;
   }

@@ -12,6 +12,7 @@ export const ALPHABET_DSC = "ALPHABET_DSC";
 export const SIN_FILTERS = "SIN_FILTERS";
 export const HEALTHSCORE_ASC = "HEALTHSCORE_ASC";
 export const HEALTHSCORE_DSC = "HEALTHSCORE_DSC";
+export const ORDER_PI = "ORDER_PI"
 
 export const getAllRecipes = () => {
   try {
@@ -103,3 +104,10 @@ export const order = (filter) => {
     type: filter === "ORDER BY..." ? SIN_FILTERS : filter,
   };
 };
+
+export const PI = () => {
+
+  return {
+    type: ORDER_PI
+  }
+}

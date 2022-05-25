@@ -1,5 +1,5 @@
 import React from "react";
-import { filterByDiet } from "../../redux/actions/index";
+import { filterByDiet, onChangePage } from "../../redux/actions/index";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Filtered.module.css";
 
@@ -10,7 +10,8 @@ const FilteredByType = () => {
   const onFilterByType = (diet) => {
     if (diet === "---- diet types ----") dispatch(filterByDiet(diet));
 
-    dispatch(filterByDiet(diet));
+    dispatch(filterByDiet(diet))
+    dispatch(onChangePage(1));
   };
 
   return (

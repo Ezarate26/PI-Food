@@ -1,4 +1,4 @@
-import { getAllRecipes, getAllTypes } from "../../redux/actions/index.js";
+import { getAllRecipes, getAllTypes, PI } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import CardsFood from "../CardsFood/CardsFood.jsx";
@@ -22,6 +22,8 @@ const FoodG = () => {
     dispatch(getAllTypes());
   }, []);
 
+
+
   return (
     <div>
       <div>
@@ -34,6 +36,7 @@ const FoodG = () => {
 
             <FilteredByOrder />
           </div>
+         
         </div>
 
         <div className={styles.foodGrid}>
